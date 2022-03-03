@@ -10,7 +10,7 @@
 # Precompiled Headers
 *.gch
 *.pch
-
+sudo apt install build-essential
 # Compiled Dynamic libraries
 *.so
 *.dylib
@@ -30,3 +30,4 @@
 *.exe
 *.out
 *.app
+.idea
