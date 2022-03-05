@@ -3,6 +3,8 @@
 //
 #include "mat.hpp"
 #include <iostream>
+#include <stdexcept>
+
 
 namespace ariel {
 
@@ -21,6 +23,12 @@ namespace ariel {
     }
 
     char **mat(int columns, int rows, char color1, char color2) {
+
+        if ( columns % 2 ==0 || rows %2 == 0 ) {
+            throw std::invalid_argument( "received non odd for columns or rows" );
+        }
+
+
         char **mati = (char **) malloc(sizeof(char *) * rows);
         for (int r = 0; r < rows; ++r) {
             mati[r] = (char *) malloc(sizeof(char) * columns);
