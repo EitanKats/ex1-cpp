@@ -7,21 +7,8 @@
 #include <vector>
 
 using std::vector;
+using std::isspace;
 namespace ariel {
-
-    void test(char **mat, int leftIdx, int rightIdx, int upIdx, int lowIdx, char color1, char color2) {
-        for (int j = leftIdx; j < rightIdx; ++j) {
-            mat[lowIdx][j] = '3';
-            mat[upIdx - 1][j] = '3';
-        }
-        for (int i = lowIdx; i < upIdx; ++i) {
-            mat[i][leftIdx] = '3';
-            mat[i][rightIdx - 1] = '3';
-
-        }
-
-
-    }
 
     void validateDimensions(int columns, int rows) {
         //the separation of the if statements is for readability
@@ -34,33 +21,44 @@ namespace ariel {
     }
 
     void validateColors(char color1, char color2) {
-
+        if (color1 == '\0' || color2 == '\0' || isspace(color1) || isspace(color2)) {
+            throw std::invalid_argument("colors are either whitespace or null characters");
+        }
     }
 
     string mat(int columns, int rows, char color1, char color2) {
 
         validateDimensions(columns, rows);
+        validateColors(color1, color2);
         string matAsStr;
-        vector<vector<char> > myVector(rows);
+        vector<vector<char> > myVector(rows, vector<char>(columns));
 
-        for (int rIdx = 0; rIdx < rows; ++rIdx) {
-            myVector[rIdx] = std::vector<char>(columns);;
+        int minDimension = columns > rows ? rows : columns;
+        int counter = 0;
+
+        while (counter < minDimension) {
+            char currColor = counter % 2 == 0 ? color1 : color2;
+            for (int j = counter; j < columns - counter; ++j) {
+                myVector[counter][j] = currColor;
+                myVector[(rows - 1) - counter][j] = currColor;
+            }
+            for (int j = counter; j < rows - counter; ++j) {
+                myVector[j][counter] = currColor;
+                myVector[j][(columns - 1) - counter] = currColor;
+
+            }
+            counter++;
         }
+
         for (int r = 0; r < rows; ++r) {
             for (int col = 0; col < columns; ++col) {
-                myVector[r][col] = color1;
+                matAsStr += myVector[r][col];
+            }
+            if (r < rows - 1) {
+                matAsStr += "\n";
+
             }
         }
-
-//
-//        for (int r = 0; r < rows; ++r) {
-//            for (int col = 0; col < columns; ++col) {
-//                matAsStr += mati[r][col];
-//            }
-//            matAsStr += "\n";
-//        }
-
-//        std::cout << matAsStr << std::endl;
         return matAsStr;
     }
 
