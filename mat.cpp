@@ -21,38 +21,16 @@ namespace ariel {
     }
 
     void validateColors(char color1, char color2) {
-        if (color1 == '\0' || color2 == '\0' || isspace(color1) || isspace(color2)) {
+        if (color1 == '\0' || color2 == '\0' || (bool) isspace(color1) || (bool) isspace(color2)) {
             throw std::invalid_argument("colors are either whitespace or null characters");
         }
     }
 
-    string mat(int columns, int rows, char color1, char color2) {
-
-        validateDimensions(columns, rows);
-        validateColors(color1, color2);
+    string rugMatToStr(vector<vector<char> > myRug, int columns, int rows) {
         string matAsStr;
-        vector<vector<char> > myVector(rows, vector<char>(columns));
-
-        int minDimension = columns > rows ? rows : columns;
-        int counter = 0;
-
-        while (counter < minDimension) {
-            char currColor = counter % 2 == 0 ? color1 : color2;
-            for (int j = counter; j < columns - counter; ++j) {
-                myVector[counter][j] = currColor;
-                myVector[(rows - 1) - counter][j] = currColor;
-            }
-            for (int j = counter; j < rows - counter; ++j) {
-                myVector[j][counter] = currColor;
-                myVector[j][(columns - 1) - counter] = currColor;
-
-            }
-            counter++;
-        }
-
         for (int r = 0; r < rows; ++r) {
             for (int col = 0; col < columns; ++col) {
-                matAsStr += myVector[r][col];
+                matAsStr += myRug[r][col];
             }
             if (r < rows - 1) {
                 matAsStr += "\n";
@@ -60,6 +38,32 @@ namespace ariel {
             }
         }
         return matAsStr;
+    }
+
+    string mat(int columns, int rows, char color1, char color2) {
+
+        validateDimensions(columns, rows);
+        validateColors(color1, color2);
+        vector<vector<char> > myRug(rows, vector<char>(columns));
+
+        int minDimension = columns > rows ? rows : columns;
+        int counter = 0;
+
+        while (counter < minDimension) {
+            char currColor = counter % 2 == 0 ? color1 : color2;
+            for (int j = counter; j < columns - counter; ++j) {
+                myRug[counter][j] = currColor;
+                myRug[(rows - 1) - counter][j] = currColor;
+            }
+            for (int j = counter; j < rows - counter; ++j) {
+                myRug[j][counter] = currColor;
+                myRug[j][(columns - 1) - counter] = currColor;
+
+            }
+            counter++;
+        }
+
+        return rugMatToStr(myRug, columns, rows);
     }
 
 
