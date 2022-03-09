@@ -45,27 +45,26 @@ namespace ariel {
         validateDimensions(columns, rows);
         validateColors(color1, color2);
         vector<vector<char> > myRug(rows, vector<char>(columns));
-
         int minDimension = columns > rows ? rows : columns;
-        int counter = 0;
+        int layerNum = 0;
 
-        while (counter < minDimension) {
-            char currColor = counter % 2 == 0 ? color1 : color2;
-            for (int j = counter; j < columns - counter; ++j) {
-                myRug[counter][j] = currColor;
-                myRug[(rows - 1) - counter][j] = currColor;
+        // the `-1` is used here because otherwise we get an out of bound exception since the indexing starts from 0
+        while (layerNum < minDimension) {
+            char currColor = layerNum % 2 == 0 ? color1 : color2;
+            for (int j = layerNum; j < columns - layerNum; ++j) {
+                myRug[layerNum][j] = currColor;
+                myRug[(rows - 1) - layerNum][j] = currColor;
             }
-            for (int j = counter; j < rows - counter; ++j) {
-                myRug[j][counter] = currColor;
-                myRug[j][(columns - 1) - counter] = currColor;
+            for (int j = layerNum; j < rows - layerNum; ++j) {
+                myRug[j][layerNum] = currColor;
+                myRug[j][(columns - 1) - layerNum] = currColor;
 
             }
-            counter++;
+            layerNum++;
         }
 
         return rugMatToStr(myRug, columns, rows);
     }
-
 
 }
 
