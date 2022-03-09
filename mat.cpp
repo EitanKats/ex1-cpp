@@ -4,6 +4,7 @@
 #include "mat.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 
 namespace ariel {
@@ -29,17 +30,18 @@ namespace ariel {
 //        }
 
         string matAsStr;
+        vector<vector<char> > myVector(rows);
 
 //        char **mati = new char *[rows];
-//        for (int r = 0; r < rows; ++r) {
-//            mati[r] = new char[columns];
-//        }
+        for (int r = 0; r < rows; ++r) {
+            myVector[r] = std::vector<char>(columns);;
+        }
 //
-//        for (int r = 0; r < rows; ++r) {
-//            for (int col = 0; col < columns; ++col) {
-//                mati[r][col] = color1;
-//            }
-//        }
+        for (int r = 0; r < rows; ++r) {
+            for (int col = 0; col < columns; ++col) {
+                myVector[r][col] = color1;
+            }
+        }
 
 //        test(mati, 0, columns, rows, 0, color1, color2);
 //
