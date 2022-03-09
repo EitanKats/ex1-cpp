@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <vector>
 
-
+using std::vector;
 namespace ariel {
 
     void test(char **mat, int leftIdx, int rightIdx, int upIdx, int lowIdx, char color1, char color2) {
@@ -33,15 +33,18 @@ namespace ariel {
         }
     }
 
+    void validateColors(char color1, char color2) {
+
+    }
+
     string mat(int columns, int rows, char color1, char color2) {
 
         validateDimensions(columns, rows);
-
         string matAsStr;
         vector<vector<char> > myVector(rows);
 
-        for (int r = 0; r < rows; ++r) {
-            myVector[r] = std::vector<char>(columns);;
+        for (int rIdx = 0; rIdx < rows; ++rIdx) {
+            myVector[rIdx] = std::vector<char>(columns);;
         }
         for (int r = 0; r < rows; ++r) {
             for (int col = 0; col < columns; ++col) {
@@ -49,18 +52,18 @@ namespace ariel {
             }
         }
 
-//        test(mati, 0, columns, rows, 0, color1, color2);
 //
-        for (int r = 0; r < rows; ++r) {
-            for (int col = 0; col < columns; ++col) {
-                matAsStr += myVector[r][col];
-            }
-            matAsStr += "\n";
-        }
+//        for (int r = 0; r < rows; ++r) {
+//            for (int col = 0; col < columns; ++col) {
+//                matAsStr += mati[r][col];
+//            }
+//            matAsStr += "\n";
+//        }
 
 //        std::cout << matAsStr << std::endl;
         return matAsStr;
     }
+
 
 }
 
