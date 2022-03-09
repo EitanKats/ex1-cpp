@@ -3,10 +3,11 @@
 //
 #include <iostream>
 #include <string>
-using namespace std;
+
+using std::string;
 #ifndef EX1_CPP_MAT_HPP
 #define EX1_CPP_MAT_HPP
-namespace ariel{
+namespace ariel {
 
     string mat(int columns, int rows, char color1, char color2);
 }
