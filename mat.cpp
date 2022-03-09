@@ -23,20 +23,26 @@ namespace ariel {
 
     }
 
+    void validateDimensions(int columns, int rows) {
+        //the separation of the if statements is for readability
+        if (columns < 1 || rows < 1) {
+            throw std::invalid_argument("Mat size is always odd and positive");
+        }
+        if (columns % 2 == 0 || rows % 2 == 0) {
+            throw std::invalid_argument("Mat size is always odd");
+        }
+    }
+
     string mat(int columns, int rows, char color1, char color2) {
 
-//        if (columns % 2 == 0 || rows % 2 == 0) {
-//            throw std::invalid_argument("Mat size is always odd");
-//        }
+        validateDimensions(columns, rows);
 
         string matAsStr;
         vector<vector<char> > myVector(rows);
 
-//        char **mati = new char *[rows];
         for (int r = 0; r < rows; ++r) {
             myVector[r] = std::vector<char>(columns);;
         }
-//
         for (int r = 0; r < rows; ++r) {
             for (int col = 0; col < columns; ++col) {
                 myVector[r][col] = color1;
@@ -45,12 +51,12 @@ namespace ariel {
 
 //        test(mati, 0, columns, rows, 0, color1, color2);
 //
-//        for (int r = 0; r < rows; ++r) {
-//            for (int col = 0; col < columns; ++col) {
-//                matAsStr += mati[r][col];
-//            }
-//            matAsStr += "\n";
-//        }
+        for (int r = 0; r < rows; ++r) {
+            for (int col = 0; col < columns; ++col) {
+                matAsStr += myVector[r][col];
+            }
+            matAsStr += "\n";
+        }
 
 //        std::cout << matAsStr << std::endl;
         return matAsStr;
