@@ -18,6 +18,9 @@ main: Main.o $(OBJECTS)
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
+Main.o: main.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) --compile $< -o $@
+
 # Ohad Madei
 StudentTest1.cpp:  
 	curl https://raw.githubusercontent.com/Ohad-Ma/carpets-maker-1/master/Test.cpp > $@
