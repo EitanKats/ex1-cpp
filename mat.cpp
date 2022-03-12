@@ -26,9 +26,6 @@ namespace ariel {
         if (color1 == '\0' || color2 == '\0' || (bool) isspace(color1) || (bool) isspace(color2)) {
             throw std::invalid_argument("colors are either whitespace or null characters");
         }
-        if (color1 < 33 || color2 < 33 || color1 > 126 || color2 > 126){
-            throw std::invalid_argument("characters should be printable");
-        }
         if (!(bool)isprint(color1)  || !(bool)isprint(color2)){
             throw std::invalid_argument("characters should be printable");
         }
