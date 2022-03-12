@@ -5,9 +5,11 @@
 #include <iostream>
 #include <stdexcept>
 #include <vector>
+#include <cctype>
 
 using std::vector;
 using std::isspace;
+using std::isprint;
 namespace ariel {
 
     void validateDimensions(int columns, int rows) {
@@ -25,6 +27,9 @@ namespace ariel {
             throw std::invalid_argument("colors are either whitespace or null characters");
         }
         if (color1 < 33 || color2 < 33 || color1 > 126 || color2 > 126){
+            throw std::invalid_argument("characters should be printable");
+        }
+        if (!(bool)isprint(color1)  || !(bool)isprint(color2)){
             throw std::invalid_argument("characters should be printable");
         }
     }
