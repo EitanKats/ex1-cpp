@@ -1,6 +1,6 @@
 #include <iostream>
 #include "mat.hpp"
-#include <stdexcept>
+#include <cstring>
 
 using namespace std;
 using namespace ariel;
@@ -50,6 +50,7 @@ int main(int argc, char **argv) {
         if (argc < 5) {
             cout << "You have entered " << argc - 1 << " arguments:" << endl;
             cout << "Please provide 4 valid arguments" << endl;
+            return 1;
         }
         columns = atoi(argv[1]);
         rows = atoi(argv[2]);
