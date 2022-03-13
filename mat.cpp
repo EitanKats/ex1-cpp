@@ -26,12 +26,12 @@ namespace ariel {
         if (color1 == '\0' || color2 == '\0' || (bool) isspace(color1) || (bool) isspace(color2)) {
             throw std::invalid_argument("colors are either whitespace or null characters");
         }
-        if (!(bool)isprint(color1)  || !(bool)isprint(color2)){
+        if (!(bool) isprint(color1) || !(bool) isprint(color2)) {
             throw std::invalid_argument("characters should be printable");
         }
     }
 
-    string rugMatToStr(vector<vector<char> > myRug, int columns, int rows) {
+    string rugMatToStr(int columns, int rows, vector<vector<char> > myRug) {
         string matAsStr;
         for (int r = 0; r < rows; ++r) {
             for (int col = 0; col < columns; ++col) {
@@ -68,7 +68,7 @@ namespace ariel {
             layerNum++;
         }
 
-        return rugMatToStr(myRug, columns, rows);
+        return rugMatToStr(columns, rows, myRug);
     }
 
 }
