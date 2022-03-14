@@ -7,6 +7,10 @@ using namespace ariel;
 
 const int exitChar = -1;
 const int rugCreation = 1;
+const int rowsArgIdx = 2;
+const int colsArgIdx = 1;
+const int color1ArgIdx = 3;
+const int color2ArgIdx = 4;
 
 
 void handleRugInput() {
@@ -52,14 +56,14 @@ int main(int argc, char **argv) {
             cout << "Please provide 4 valid arguments" << endl;
             return 1;
         }
-        columns = atoi(argv[1]);
-        rows = atoi(argv[2]);
+        columns = atoi(argv[colsArgIdx]);
+        rows = atoi(argv[rowsArgIdx]);
         if (strlen(argv[3]) > 1 || strlen(argv[4]) > 1) {
             cout << "The arguments provided are in the wrong format" << endl;
             return 1;
         }
-        color1 = argv[3][0];
-        color2 = argv[4][0];
+        color1 = argv[color1ArgIdx][0];
+        color2 = argv[color2ArgIdx][0];
 
         cout << mat(columns, rows, color1, color2) << endl;
     } catch (exception &ex) {
