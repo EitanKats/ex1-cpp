@@ -35,7 +35,7 @@ namespace ariel {
         string matAsStr;
         for (int r = 0; r < rows; ++r) {
             for (int col = 0; col < columns; ++col) {
-                matAsStr += myRug[r][col];
+                matAsStr += myRug.at(r).at(col);
             }
             if (r < rows - 1) {
                 matAsStr += "\n";
@@ -53,16 +53,17 @@ namespace ariel {
         int minDimension = columns > rows ? rows : columns;
         int layerNum = 0;
 
+        // in case of out of range access operator[] causes undefined behaviour, whereas at() returns proper out_of_range exception
         // the `-1` is used here because otherwise we get an out of bound exception since the indexing starts from 0
         while (layerNum < minDimension) {
             char currColor = layerNum % 2 == 0 ? color1 : color2;
             for (int j = layerNum; j < columns - layerNum; ++j) {
-                myRug[layerNum][j] = currColor;
-                myRug[(rows - 1) - layerNum][j] = currColor;
+                myRug.at(layerNum).at(j) = currColor;
+                myRug.at((rows - 1) - layerNum).at(j) = currColor;
             }
             for (int j = layerNum; j < rows - layerNum; ++j) {
-                myRug[j][layerNum] = currColor;
-                myRug[j][(columns - 1) - layerNum] = currColor;
+                myRug.at(j).at(layerNum) = currColor;
+                myRug.at(j).at((columns - 1) - layerNum) = currColor;
 
             }
             layerNum++;
