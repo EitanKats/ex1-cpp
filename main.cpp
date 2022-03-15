@@ -20,7 +20,7 @@ void handleRugInput() {
     cin >> rows >> columns;
     cout << "enter rug colors" << endl;
     cin >> color1 >> color2;
-    cout << mat(columns, rows, color1, color2) << endl;
+    cout << "Your rug :\n" << mat(columns, rows, color1, color2) << endl;
     return;
 }
 
