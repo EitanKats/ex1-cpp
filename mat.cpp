@@ -57,10 +57,12 @@ namespace ariel {
         // the `-1` is used here because otherwise we get an out of bound exception since the indexing starts from 0
         while (layerNum < minDimension) {
             char currColor = layerNum % 2 == 0 ? color1 : color2;
+            // row filler
             for (int j = layerNum; j < columns - layerNum; ++j) {
                 myRug.at(layerNum).at(j) = currColor;
                 myRug.at((rows - 1) - layerNum).at(j) = currColor;
             }
+            // column filler
             for (int j = layerNum; j < rows - layerNum; ++j) {
                 myRug.at(j).at(layerNum) = currColor;
                 myRug.at(j).at((columns - 1) - layerNum) = currColor;
